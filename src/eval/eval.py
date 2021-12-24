@@ -119,17 +119,6 @@ def eval(config):
 if __name__ == "__main__":
     config = read_config("config.yml")
 
-    # eval_df = evaluate_all_parsers(config)
-    pcfg_df = malt_to_df(evaluate_single_parser(config, "pcfg"))
-    nn_df = malt_to_df(evaluate_single_parser(config, "nn"))
-    malt_df = malt_to_df(evaluate_single_parser(config, "malt"))
-    #
-    #
-    eval_df = pd.concat([pcfg_df, nn_df, malt_df], keys=["pcfg", "nn", "malt"], axis=1).swaplevel(0, 1, axis=1).sort_index(level=0, axis=1)
-
-    # eval_df = pcfg_df.merge(nn_df, on="Deprel", how="outer", validate="1:1")
+    eval_df = evaluate_all_parsers(config)
 
     print(eval_df)
-
-    # evaluate_single_parser(config, "nn")
-    # evaluate_single_parser(config, "malt")
