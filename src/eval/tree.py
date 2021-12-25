@@ -3,6 +3,7 @@ from box import Box
 from src.utils import *
 from typing import *
 
+
 def treeview(config: Box) -> None:
     """
     Pipeline wrapper to run treeview for a given parser
@@ -16,7 +17,6 @@ def treeview(config: Box) -> None:
     evaluate_all_samples(config, parser)
 
     return None
-
 
 
 def evaluate_all_samples(config: Box, parser: str):
@@ -42,13 +42,15 @@ def evaluate_all_samples(config: Box, parser: str):
     gs_path = Path(config.gold_path).joinpath(config.files.gold_conll)
 
     # remove last two sentences due to sentence boundary inconsistency (does not work in MatlEval otherwise)
-    eval_file_final  =  _remove_last_two_sents(parse_file)
+    eval_file_final = _remove_last_two_sents(parse_file)
     gs_file_final = _remove_last_two_sents(gs_path)
 
     # Run MaltEval on all but last sentence
-    bash_command = f"java -jar malteval_dist_20141005/lib/MaltEval.jar " \
-                   f"-s {eval_file_final} " \
-                   f"-g {gs_file_final} -v 1"
+    bash_command = (
+        f"java -jar malteval_dist_20141005/lib/MaltEval.jar "
+        f"-s {eval_file_final} "
+        f"-g {gs_file_final} -v 1"
+    )
 
     output, error = run_bash(bash_command)
 
@@ -69,7 +71,9 @@ def evaluate_single_sample(config: Box, parser: str, sample_no: int) -> None:
     valid_parsers = config.parse_files.to_dict().keys()
     assert parser in valid_parsers, f"Invdalid parser, select one of {valid_parser}"
 
-    assert sample_no in SAMPLES, f"Invalid sample number selected. Valid numbers; {SAMPLES}"
+    assert (
+        sample_no in SAMPLES
+    ), f"Invalid sample number selected. Valid numbers; {SAMPLES}"
 
     sample_path = Path(config.parse_path).joinpath(config.parse_files[parser]).parent
     if parser in ["nn", "pcfg"]:
@@ -80,14 +84,16 @@ def evaluate_single_sample(config: Box, parser: str, sample_no: int) -> None:
 
     gs_path = Path(config.gold_path).joinpath(f"sample_{sample_no}.conll")
 
-    bash_command = f"java -jar malteval_dist_20141005/lib/MaltEval.jar " \
-               f"-s {sample_path} " \
-               f"-g {gs_path} -v 1"
+    bash_command = (
+        f"java -jar malteval_dist_20141005/lib/MaltEval.jar "
+        f"-s {sample_path} "
+        f"-g {gs_path} -v 1"
+    )
 
     output, error = run_bash(bash_command)
 
-
     return None
+
 
 def _remove_last_two_sents(filepath: Union[str, Path]) -> None:
 
