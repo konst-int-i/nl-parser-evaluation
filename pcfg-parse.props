@@ -1,0 +1,23 @@
+outputFormat = conll
+
+# input file location
+<!-- file = ../data/raw/selected_samples.txt -->
+
+# output file location
+outputDirectory = ../data/parses/pcfg/conll
+
+# list of annotators to run
+annotators = tokenize,ssplit,pos,lemma,parse
+
+tokenize.options = splitHyphenated=false
+
+# customize the pos model
+parse.model = edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz
+
+# Output Stanford dependencies (Universal dependencies otherwise)
+parse.originalDependencies = true
+
+parse.buildgraphs = true
+
+# Enforce binary trees of the dependency parse (default=false)
+parse.binarytrees = false
