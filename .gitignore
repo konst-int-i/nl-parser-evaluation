@@ -1,5 +1,11 @@
 # Parser source
 stanford-corenlp-4.3.2/
+rasp3os/
+python-corenlp/
+malteval_dist_20141005/
+malteval_src/
+maltparser-1.9.2/
+archive/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
