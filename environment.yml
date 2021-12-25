@@ -1,0 +1,10 @@
+name: parse
+channels:
+  - conda-forge
+dependencies:
+  - nltk
+  - spacy
+  - pyyaml
+  - pip
+  - pip:
+      - python-box
