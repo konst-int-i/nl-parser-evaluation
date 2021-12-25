@@ -10,6 +10,7 @@ import logging
 from src import *
 from pathlib import Path
 
+
 def evaluate_single_parser(config: Box, parser: str) -> str:
     """
     Takes in single parser and runs MaltEval to generate evaluation metrics
@@ -31,11 +32,13 @@ def evaluate_single_parser(config: Box, parser: str) -> str:
     parse_path = Path(config.parse_path).joinpath(parse_files[parser])
     gold_path = Path(config.gold_path).joinpath(config.files.gold_conll)
 
-    bash_command = f"java -jar malteval_dist_20141005/lib/MaltEval.jar " \
-                   f"--Metric self " \
-                   f"--GroupBy Deprel " \
-                   f"-s {parse_path} " \
-                   f"-g {gold_path}"
+    bash_command = (
+        f"java -jar malteval_dist_20141005/lib/MaltEval.jar "
+        f"--Metric self "
+        f"--GroupBy Deprel "
+        f"-s {parse_path} "
+        f"-g {gold_path}"
+    )
 
     logging.info(f"Executing: {bash_command}")
 
@@ -44,9 +47,10 @@ def evaluate_single_parser(config: Box, parser: str) -> str:
     # convert bytes object to regular string
     output_str = output.decode("utf-8")
 
-    logging.info(output_str)
+    logging.debug(output_str)
 
     return output_str
+
 
 def malt_to_df(output: str) -> pd.DataFrame:
     """
@@ -73,13 +77,10 @@ def malt_to_df(output: str) -> pd.DataFrame:
         # post-processing
     eval_df = eval_df.replace("-", np.nan)
     eval_df = eval_df.astype(
-        {"precision": "float",
-         "recall": "float",
-         "fscore": "float"}
+        {"precision": "float", "recall": "float", "fscore": "float"}
     )
 
     return eval_df
-
 
 
 def evaluate_all_parsers(config: Box) -> None:
@@ -96,24 +97,28 @@ def evaluate_all_parsers(config: Box) -> None:
         df = malt_to_df(evaluate_single_parser(config, parser))
         parser_dfs.append(df)
 
-
-    # pcfg_df = malt_to_df(evaluate_single_parser(config, "pcfg"))
-    # nn_df = malt_to_df(evaluate_single_parser(config, "nn"))
-    # malt_df = malt_to_df(evaluate_single_parser(config, "malt"))
-    # print(config.eval.to_list())
-
-    eval_df = pd.concat(parser_dfs, keys=config.eval.to_list(), axis=1).swaplevel(0, 1,axis=1).sort_index(level=0, axis=1)
-    # eval_df = pd.concat([pcfg_df, malt_df, nn_df], keys=["pcfg", "malt", "nn"], axis=1).swaplevel(0, 1,axis=1).sort_index(level=0, axis=1)
+    eval_df = (
+        pd.concat(parser_dfs, keys=config.eval.to_list(), axis=1)
+        .swaplevel(0, 1, axis=1)
+        .sort_index(level=0, axis=1)
+    )
 
     return eval_df
 
 
-def eval(config):
+def eval(config) -> None:
     """
     Wrapper function for pipeline
     """
 
-    evaluate_all_parsers(config)
+    eval_df = evaluate_all_parsers(config)
+
+    # write to csv
+    write_path = Path(config.eval_path).joinpath("parser_eval.csv")
+    logging.info(f"Writing parser evaluation to {write_path}")
+
+    eval_df.to_csv(write_path)
+    return None
 
 
 if __name__ == "__main__":
