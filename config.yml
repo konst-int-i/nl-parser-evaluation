@@ -1,0 +1,31 @@
+pipeline: # pipeline steps to run
+#  - parse_malt
+#  - parse_pcfg
+#  - parse_nn
+  - src.gold_standard
+  - src.eval
+  - src.treeview
+
+
+data_path: data/raw/
+parse_path: data/parses/
+gold_path: data/gold_standard/
+eval_path: data/eval/
+
+files:
+  raw_samples: selected_samples.txt
+  gold_excel: gold_standard.xlsx
+  gold_conll: gold_standard.conll
+
+parse_files:
+  nn: nn/conllu/selected_samples.txt.conll
+  pcfg: pcfg/conllu/selected_samples.txt.conll
+  malt: malt/selected_samples.conll
+
+
+eval: # untick models that should be evaluated
+  - nn
+  - malt
+  - pcfg
+
+treeview: nn # can only run one treeview at a time
