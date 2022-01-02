@@ -11,7 +11,7 @@ from src import *
 from pathlib import Path
 
 
-def evaluate_single_parser(config: Box, parser: str) -> str:
+def evaluate_single_parser(config: Box, parser: str, groupby: str) -> str:
     """
     Takes in single parser and runs MaltEval to generate evaluation metrics
     (precision, recall, f1) by dependency relation type of given parser compared
@@ -35,7 +35,7 @@ def evaluate_single_parser(config: Box, parser: str) -> str:
     bash_command = (
         f"java -jar malteval_dist_20141005/lib/MaltEval.jar "
         f"--Metric self "
-        f"--GroupBy Deprel "
+        f"--GroupBy {groupby} "
         f"-s {parse_path} "
         f"-g {gold_path}"
     )
@@ -47,12 +47,13 @@ def evaluate_single_parser(config: Box, parser: str) -> str:
     # convert bytes object to regular string
     output_str = output.decode("utf-8")
 
-    logging.debug(output_str)
+    # logging.debug(output_str)
+    logging.info(output_str)
 
     return output_str
 
 
-def malt_to_df(output: str) -> pd.DataFrame:
+def malt_to_df(output: str, groupby: str = "Deprel") -> pd.DataFrame:
     """
     Function which takes in the MaltEval output string and converts it to a
     pandas dataframe
@@ -67,7 +68,7 @@ def malt_to_df(output: str) -> pd.DataFrame:
 
     parse_eval = output.rstrip().split("\n")
 
-    eval_cols = ["precision", "recall", "fscore", "Deprel"]
+    eval_cols = ["precision", "recall", "fscore", groupby]
     eval_df = pd.DataFrame(columns=eval_cols)
     for deprel in parse_eval[12:]:
         entries = deprel.split(" ")
@@ -80,10 +81,10 @@ def malt_to_df(output: str) -> pd.DataFrame:
         {"precision": "float", "recall": "float", "fscore": "float"}
     )
 
-    return eval_df
+    return eval_df[[groupby, "precision", "recall", "fscore"]]
 
 
-def evaluate_all_parsers(config: Box) -> None:
+def evaluate_all_parsers(config: Box, by: str) -> None:
     """
     Function which
     Args:
@@ -92,16 +93,50 @@ def evaluate_all_parsers(config: Box) -> None:
     Returns:
 
     """
-    parser_dfs = []
-    for parser in config.eval:
-        df = malt_to_df(evaluate_single_parser(config, parser))
-        parser_dfs.append(df)
+    nn_df = malt_to_df(evaluate_single_parser(config, "nn", by), by)
+    malt_df = malt_to_df(evaluate_single_parser(config, "malt", by), by)
+    pcfg_df = malt_to_df(evaluate_single_parser(config, "pcfg", by), by)
 
-    eval_df = (
-        pd.concat(parser_dfs, keys=config.eval.to_list(), axis=1)
-        .swaplevel(0, 1, axis=1)
-        .sort_index(level=0, axis=1)
+    eval_df = nn_df.merge(
+        right=malt_df, how="outer", on=by, validate="1:1", suffixes=["_nn", "_malt"]
     )
+    eval_df = eval_df.merge(
+        right=pcfg_df, how="outer", on=by, validate="1:1", suffixes=["", "_pcfg"]
+    )
+    eval_df.rename(
+        {
+            "precision": "precision_pcfg",
+            "recall": "recall_pcfg",
+            "fscore": "fscore_pcfg",
+        },
+        axis=1,
+        inplace=True,
+    )
+
+    eval_df = eval_df.sort_values(by=by, ascending=True)
+    eval_df = eval_df.sort_index(axis=1)
+
+    # drop extremely sparse dependency relations (rows summing to 0)
+    eval_df = eval_df.loc[(eval_df.sum(axis=1) != 0), :]
+
+    # add suppport column
+    if by == "Deprel":
+        dfs = []
+        for i in SAMPLES:
+            df = pd.read_excel(
+                "data/gold_standard/gold_standard.xlsx", sheet_name=f"sample_{i}"
+            )
+            dfs.append(df)
+
+        gs_df = pd.concat(dfs)
+        gs_df = gs_df[["DEPREL"]].dropna().reset_index().drop("index", axis=1)
+        support_df = (
+            gs_df.value_counts()
+            .reset_index()
+            .rename({0: "support", "DEPREL": "Deprel"}, axis=1)
+        )
+
+        eval_df = eval_df.merge(support_df, on="Deprel", validate="1:1", how="left")
 
     return eval_df
 
@@ -111,19 +146,41 @@ def eval(config) -> None:
     Wrapper function for pipeline
     """
 
-    eval_df = evaluate_all_parsers(config)
+    deprel_df = evaluate_all_parsers(config, by="Deprel")
+
+    rel_length_df = evaluate_all_parsers(config, by="RelationLength")
+    rel_length_df["RelationLength"] = rel_length_df["RelationLength"].astype("int")
+    rel_length_df.sort_values(by="RelationLength", inplace=True)
+
+    arc_dir_df = evaluate_all_parsers(config, by="ArcDirection")
 
     # write to csv
-    write_path = Path(config.eval_path).joinpath("parser_eval.csv")
-    logging.info(f"Writing parser evaluation to {write_path}")
+    deprel_path = Path(config.eval_path).joinpath("deprel_eval.csv")
+    rel_length_path = Path(config.eval_path).joinpath("arc_length_eval.csv")
+    arc_dir_path = Path(config.eval_path).joinpath("arc_dir_eval.csv")
 
-    eval_df.to_csv(write_path)
+    logging.info(f"Writing parser deprel evaluation to {deprel_path}")
+    logging.info(f"Writing parser relation length evaluation to {rel_length_path}")
+    logging.info(f"Writing parser arc direction evaluation to {arc_dir_path}")
+
+    deprel_df.to_csv(deprel_path, index=False)
+    rel_length_df.to_csv(rel_length_path, index=False)
+    arc_dir_df.to_csv(arc_dir_path, index=False)
     return None
 
 
 if __name__ == "__main__":
     config = read_config("config.yml")
 
-    eval_df = evaluate_all_parsers(config)
+    eval(config)
 
-    print(eval_df)
+    # deprel_df = evaluate_all_parsers(config, by="Deprel")
+    # rl_df = evaluate_all_parsers(config, by="RelationLength")
+    # rl_df["RelationLength"] = rl_df["RelationLength"].astype("int")
+    # rl_df.sort_values(by="RelationLength", inplace=True)
+    # relation length
+    # df = malt_to_df(evaluate_single_parser(config, "nn", "RelationLength"), "RelationLength")
+    # print(deprel_df)
+    # print(rl_df)
+
+    # print(eval_df)
