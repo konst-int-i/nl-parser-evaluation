@@ -1,10 +1,10 @@
 pipeline: # pipeline steps to run
-#  - parse_malt
-#  - parse_pcfg
-#  - parse_nn
-  - src.gold_standard
+  - src.parse_malt
+  - src.parse_pcfg
+  - src.parse_nn
+#  - src.gold_standard
   - src.eval
-  - src.treeview
+#  - src.treeview
 
 
 data_path: data/raw/
