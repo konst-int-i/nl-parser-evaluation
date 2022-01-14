@@ -39,5 +39,5 @@ steps on and off to only run a subset. After first execution, each pipeline step
 After executing the full pipeline, you can review the output of each parser using the `TreeViewer`. To select which 
 parser to view set the `treeview` flat in the `config.yml`. 
 
-[!img](treeviewer_example.png)
+![img](treeviewer_example.png)
 
