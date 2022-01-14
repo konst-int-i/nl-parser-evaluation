@@ -4,6 +4,7 @@ from src.utils import *
 from pathlib import Path
 from stanza.utils.conll import CoNLL
 import os
+import logging
 
 
 class BaseParse(object):
@@ -13,6 +14,7 @@ class BaseParse(object):
 
     def __init__(self, config: Box):
         self.config = config
+        self.timer = Timer()
 
     @abstractmethod
     def run(self):
@@ -127,12 +129,18 @@ class Malt(BaseParse):
         """
         Wrapper function running preprocessing, parsing and post-processing
         """
+        logging.info("Running MALT system")
+        start = self.timer.start()
         self.preprocess()
         self.parse()
         self.postprocess()
 
-    def parse(self):
+        logging.info(f"Total system Runtime: {self.timer.stop()}")
 
+    def parse(self):
+        logging.info(f"Parsing...")
+        time = Timer()
+        start = time.start()
         os.chdir("maltparser-1.9.2")
 
         bash_command = """
@@ -142,7 +150,7 @@ class Malt(BaseParse):
         done
         """
         subprocess.check_output(bash_command, shell=True)
-
+        logging.info(f"Parse time: {time.stop()}")
         os.chdir("../")
 
     def preprocess(self) -> None:
@@ -182,17 +190,24 @@ class PCFG(BaseParse):
         super().__init__(config)
 
     def run(self):
+        logging.info("Running PCFG system")
+        start = self.timer.start()
+
         self.parse()
         self.postprocess("data/parses/pcfg/conll/selected_samples.txt.conll")
+        logging.info(f"Total system Runtime: {self.timer.stop()}")
 
     def parse(self):
 
         os.chdir("stanford-corenlp-4.3.2")
+        time = Timer()
+        start = time.start()
+
         bash_command = """
         java -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLP -props ../pcfg-parse.props -file ../data/raw/selected_samples.txt
         """
         subprocess.check_output(bash_command, shell=True)
-
+        logging.info(f"Parse time: {time.stop()}")
         os.chdir("../")
 
     def postprocess(self, conll_path) -> None:
@@ -207,17 +222,21 @@ class StanfordNN(BaseParse):
         super().__init__(config)
 
     def run(self):
+        logging.info("Running Stanford NN system")
+        start = self.timer.start()
         self.parse()
-
         self.postprocess("data/parses/nn/conll/selected_samples.txt.conll")
+        logging.info(f"Total system Runtime: {self.timer.stop()}")
 
     def parse(self):
         os.chdir("stanford-corenlp-4.3.2")
-
+        time = Timer()
+        start = time.start()
         bash_command = """
         java -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLP -props ../nn-parse.props -file ../data/raw/selected_samples.txt
         """
         subprocess.check_output(bash_command, shell=True)
+        logging.info(f"Parse time: {time.stop()}")
 
         os.chdir("../")
 
