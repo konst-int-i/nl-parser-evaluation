@@ -2,9 +2,9 @@ pipeline: # pipeline steps to run
   - src.parse_malt
   - src.parse_pcfg
   - src.parse_nn
-#  - src.gold_standard
+  - src.gold_standard
   - src.eval
-#  - src.treeview
+  - src.treeview
 
 
 data_path: data/raw/
@@ -28,4 +28,4 @@ eval: # untick models that should be evaluated
   - malt
   - pcfg
 
-treeview: nn # can only run one treeview at a time
+treeview: pcfg # can only run one treeview at a time
