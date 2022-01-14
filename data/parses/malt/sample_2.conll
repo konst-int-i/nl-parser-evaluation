@@ -1,0 +1,12 @@
+1	At	_	ADP	IN	_	3	quantmod	_	_
+2	least	_	ADJ	JJS	Degree=Sup	1	dep	_	_
+3	two	_	NUM	CD	NumType=Card	4	num	_	_
+4	men	_	NOUN	NNS	Number=Plur	5	nsubj	_	_
+5	broke	_	VERB	VBD	Mood=Ind|Tense=Past|VerbForm=Fin	0	null	_	_
+6	in	_	ADV	RB	_	5	advmod	_	_
+7	and	_	CCONJ	CC	_	5	cc	_	_
+8	stole	_	VERB	VBD	Mood=Ind|Tense=Past|VerbForm=Fin	5	conj	_	_
+9	my	_	PRON	PRP$	Number=Sing|Person=1|Poss=Yes|PronType=Prs	10	poss	_	_
+10	TV	_	NOUN	NN	Number=Sing	8	dobj	_	_
+11	.	_	PUNCT	.	_	5	punct	_	_
+

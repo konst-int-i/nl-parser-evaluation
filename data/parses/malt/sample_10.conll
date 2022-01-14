@@ -1,0 +1,22 @@
+1	Natural	_	ADJ	JJ	Degree=Pos	2	amod	_	_
+2	disasters	_	NOUN	NNS	Number=Plur	10	nsubj	_	_
+3	-	_	PUNCT	,	_	10	punct	_	_
+4	storms	_	NOUN	NNS	Number=Plur	10	nsubj	_	_
+5	,	_	PUNCT	,	_	10	punct	_	_
+6	flooding	_	NOUN	NN	Number=Sing	10	nsubj	_	_
+7	,	_	PUNCT	,	_	10	punct	_	_
+8	hurricanes	_	NOUN	NNS	Number=Plur	10	nsubj	_	_
+9	-	_	PUNCT	,	_	10	punct	_	_
+10	occur	_	VERB	VBP	Mood=Ind|Tense=Pres|VerbForm=Fin	0	null	_	_
+11	infrequently	_	ADV	RB	_	10	advmod	_	_
+12	but	_	CCONJ	CC	_	10	cc	_	_
+13	cause	_	VERB	VBP	Mood=Ind|Tense=Pres|VerbForm=Fin	10	conj	_	_
+14	devastation	_	NOUN	NN	Number=Sing	13	dobj	_	_
+15	that	_	PRON	WDT	PronType=Rel	16	nsubj	_	_
+16	strains	_	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	14	rcmod	_	_
+17	resources	_	NOUN	NNS	Number=Plur	16	dobj	_	_
+18	to	_	ADP	IN	_	16	prep	_	_
+19	breaking	_	NOUN	NN	Number=Sing	20	nn	_	_
+20	point	_	NOUN	NN	Number=Sing	18	pobj	_	_
+21	.	_	PUNCT	.	_	10	punct	_	_
+

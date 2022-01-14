@@ -1,0 +1,14 @@
+1	The	_	DET	DT	Definite=Def|PronType=Art	2	det	_	_
+2	horse	_	NOUN	NN	Number=Sing	9	nsubj	_	_
+3	which	_	PRON	WDT	PronType=Rel	6	rel	_	_
+4	Kim	_	PROPN	NNP	Number=Sing	6	nsubj	_	_
+5	sometimes	_	ADV	RB	_	6	advmod	_	_
+6	rides	_	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	2	rcmod	_	_
+7	is	_	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	9	cop	_	_
+8	more	_	ADV	RBR	_	9	advmod	_	_
+9	bad	_	ADJ	JJ	Degree=Pos	0	null	_	_
+10	tempered	_	VERB	VBN	Tense=Past|VerbForm=Part	9	prep	_	_
+11	than	_	ADP	IN	_	10	prep	_	_
+12	mine	_	PRON	PRP	Number=Sing|PronType=Prs	11	pobj	_	_
+13	.	_	PUNCT	.	_	9	punct	_	_
+
