@@ -1,0 +1,1 @@
+The Penn Treebank tagset was culled from the original 87- tag tagset for the Brown Corpus. For example the original Brown and C5 tagsets include a separate tag for each of the different forms of the verbs do (e.g. C5 tag VDD for did and VDG tag for doing), be and have.

@@ -1,0 +1,10 @@
+1	The	_	DET	DT	Definite=Def|PronType=Art	0	_	_	start_char=0|end_char=3
+2	old	_	ADJ	JJ	Degree=Pos	1	_	_	start_char=4|end_char=7
+3	car	_	NOUN	NN	Number=Sing	2	_	_	start_char=8|end_char=11
+4	broke	_	VERB	VBD	Mood=Ind|Tense=Past|VerbForm=Fin	3	_	_	start_char=12|end_char=17
+5	down	_	ADP	RP	_	4	_	_	start_char=18|end_char=22
+6	in	_	ADP	IN	_	5	_	_	start_char=23|end_char=25
+7	the	_	DET	DT	Definite=Def|PronType=Art	6	_	_	start_char=26|end_char=29
+8	car	_	NOUN	NN	Number=Sing	7	_	_	start_char=30|end_char=33
+9	park	_	NOUN	NN	Number=Sing	8	_	_	start_char=34|end_char=38
+10	.	_	PUNCT	.	_	9	_	_	start_char=38|end_char=39

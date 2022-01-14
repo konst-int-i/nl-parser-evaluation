@@ -1,0 +1,13 @@
+1	The	_	DET	DT	Definite=Def|PronType=Art	0	_	_	start_char=0|end_char=3
+2	horse	_	NOUN	NN	Number=Sing	1	_	_	start_char=4|end_char=9
+3	which	_	PRON	WDT	PronType=Rel	2	_	_	start_char=10|end_char=15
+4	Kim	_	PROPN	NNP	Number=Sing	3	_	_	start_char=16|end_char=19
+5	sometimes	_	ADV	RB	_	4	_	_	start_char=20|end_char=29
+6	rides	_	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	_	_	start_char=30|end_char=35
+7	is	_	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	6	_	_	start_char=36|end_char=38
+8	more	_	ADV	RBR	_	7	_	_	start_char=39|end_char=43
+9	bad	_	ADJ	JJ	Degree=Pos	8	_	_	start_char=44|end_char=47
+10	tempered	_	VERB	VBN	Tense=Past|VerbForm=Part	9	_	_	start_char=48|end_char=56
+11	than	_	ADP	IN	_	10	_	_	start_char=57|end_char=61
+12	mine	_	PRON	PRP	Number=Sing|PronType=Prs	11	_	_	start_char=62|end_char=66
+13	.	_	PUNCT	.	_	12	_	_	start_char=66|end_char=67

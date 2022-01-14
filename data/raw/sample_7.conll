@@ -1,0 +1,16 @@
+1	It	_	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	0	_	_	start_char=0|end_char=2
+2	was	_	AUX	VBD	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	1	_	_	start_char=3|end_char=6
+3	my	_	PRON	PRP$	Number=Sing|Person=1|Poss=Yes|PronType=Prs	2	_	_	start_char=7|end_char=9
+4	aunt	_	NOUN	NN	Number=Sing	3	_	_	start_char=10|end_char=14
+5	's	_	PART	POS	_	4	_	_	start_char=14|end_char=16
+6	car	_	NOUN	NN	Number=Sing	5	_	_	start_char=17|end_char=20
+7	which	_	PRON	WDT	PronType=Rel	6	_	_	start_char=21|end_char=26
+8	we	_	PRON	PRP	Case=Nom|Number=Plur|Person=1|PronType=Prs	7	_	_	start_char=27|end_char=29
+9	sold	_	VERB	VBD	Mood=Ind|Tense=Past|VerbForm=Fin	8	_	_	start_char=30|end_char=34
+10	at	_	ADP	IN	_	9	_	_	start_char=35|end_char=37
+11	auction	_	NOUN	NN	Number=Sing	10	_	_	start_char=38|end_char=45
+12	last	_	ADJ	JJ	Degree=Pos	11	_	_	start_char=46|end_char=50
+13	year	_	NOUN	NN	Number=Sing	12	_	_	start_char=51|end_char=55
+14	in	_	ADP	IN	_	13	_	_	start_char=56|end_char=58
+15	February	_	PROPN	NNP	Number=Sing	14	_	_	start_char=59|end_char=67
+16	.	_	PUNCT	.	_	15	_	_	start_char=67|end_char=68

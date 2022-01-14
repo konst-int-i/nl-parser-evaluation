@@ -1,0 +1,26 @@
+1	Skill	_	NOUN	NN	Number=Sing	0	_	_	start_char=0|end_char=5
+2	without	_	ADP	IN	_	1	_	_	start_char=6|end_char=13
+3	imagination	_	NOUN	NN	Number=Sing	2	_	_	start_char=14|end_char=25
+4	is	_	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	3	_	_	start_char=26|end_char=28
+5	craftsmanship	_	NOUN	NN	Number=Sing	4	_	_	start_char=29|end_char=42
+6	and	_	CCONJ	CC	_	5	_	_	start_char=43|end_char=46
+7	gives	_	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	6	_	_	start_char=47|end_char=52
+8	us	_	PRON	PRP	Case=Acc|Number=Plur|Person=1|PronType=Prs	7	_	_	start_char=53|end_char=55
+9	many	_	ADJ	JJ	Degree=Pos	8	_	_	start_char=56|end_char=60
+10	useful	_	ADJ	JJ	Degree=Pos	9	_	_	start_char=61|end_char=67
+11	objects	_	NOUN	NNS	Number=Plur	10	_	_	start_char=68|end_char=75
+12	such	_	ADJ	JJ	Degree=Pos	11	_	_	start_char=76|end_char=80
+13	as	_	ADP	IN	_	12	_	_	start_char=81|end_char=83
+14	wickerwork	_	NOUN	NN	Number=Sing	13	_	_	start_char=84|end_char=94
+15	picnic	_	NOUN	NN	Number=Sing	14	_	_	start_char=95|end_char=101
+16	baskets	_	NOUN	NNS	Number=Plur	15	_	_	start_char=102|end_char=109
+17	.	_	PUNCT	.	_	16	_	_	start_char=109|end_char=110
+
+1	Imagination	_	NOUN	NN	Number=Sing	0	_	_	start_char=111|end_char=122
+2	without	_	ADP	IN	_	1	_	_	start_char=123|end_char=130
+3	skill	_	NOUN	NN	Number=Sing	2	_	_	start_char=131|end_char=136
+4	gives	_	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	3	_	_	start_char=137|end_char=142
+5	us	_	PRON	PRP	Case=Acc|Number=Plur|Person=1|PronType=Prs	4	_	_	start_char=143|end_char=145
+6	modern	_	ADJ	JJ	Degree=Pos	5	_	_	start_char=146|end_char=152
+7	art	_	NOUN	NN	Number=Sing	6	_	_	start_char=153|end_char=156
+8	.	_	PUNCT	.	_	7	_	_	start_char=156|end_char=157

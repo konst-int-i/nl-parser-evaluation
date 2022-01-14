@@ -1,0 +1,20 @@
+The old car broke down in the car park.
+
+At least two men broke in and stole my TV.
+
+The horse which Kim sometimes rides is more bad tempered than mine.
+
+It was my aunt's car which we sold at auction last year in February.
+
+Natural disasters - storms, flooding, hurricanes - occur infrequently but cause devastation that strains resources to breaking point.
+
+The Penn Treebank tagset was culled from the original 87- tag tagset for the Brown Corpus. For example the original Brown and C5 tagsets include a separate tag for each of the different forms of the verbs do (e.g. C5 tag VDD for did and VDG tag for doing), be and have.
+
+Thus, the EM-trained "pure HMM" tagger is probably best suited to cases where no training data is available, for example, when tagging languages for which no data was previously hand-tagged.
+
+Coming home from very lonely places, all of us go a little mad: whether from great personal success, or just an all- night drive, we are the sole survivors of a world no one else has ever seen.
+
+Skill without imagination is craftsmanship and gives us many useful objects such as wickerwork picnic baskets. Imagination without skill gives us modern art.
+
+An MoD spokesman said: "Surveys of Astute have now been completed and she will proceed to Faslane under her own power. She is being escorted by tugs and HMS Shoreham."
+

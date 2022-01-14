@@ -1,0 +1,11 @@
+1	At	_	ADP	IN	_	0	_	_	start_char=0|end_char=2
+2	least	_	ADJ	JJS	Degree=Sup	1	_	_	start_char=3|end_char=8
+3	two	_	NUM	CD	NumType=Card	2	_	_	start_char=9|end_char=12
+4	men	_	NOUN	NNS	Number=Plur	3	_	_	start_char=13|end_char=16
+5	broke	_	VERB	VBD	Mood=Ind|Tense=Past|VerbForm=Fin	4	_	_	start_char=17|end_char=22
+6	in	_	ADV	RB	_	5	_	_	start_char=23|end_char=25
+7	and	_	CCONJ	CC	_	6	_	_	start_char=26|end_char=29
+8	stole	_	VERB	VBD	Mood=Ind|Tense=Past|VerbForm=Fin	7	_	_	start_char=30|end_char=35
+9	my	_	PRON	PRP$	Number=Sing|Person=1|Poss=Yes|PronType=Prs	8	_	_	start_char=36|end_char=38
+10	TV	_	NOUN	NN	Number=Sing	9	_	_	start_char=39|end_char=41
+11	.	_	PUNCT	.	_	10	_	_	start_char=41|end_char=42
